@@ -5,7 +5,7 @@ import com.androiddevs.mvvmnewsapp.ui.models.Article
 
 @Dao
 interface ArticleDao {
-    // if a article already exists by onConflict fun it replaces the article
+    // if a article already exists by onConflict func it replaces the article
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     //coroutines
     suspend fun upsert(article: Article): Long
