@@ -15,15 +15,14 @@ class NewsActivity : AppCompatActivity() {
     //lateinit allows you to avoid initializing a property when an object is constructed
     lateinit var viewModel: NewsViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
-
         //To connect all navigations
-        val newsRepository= NewsRepository(ArticleDatabase(this))
-        val viewModelProviderFactory =NewsViewModelProviderFactory(newsRepository)
-        viewModel = ViewModelProvider(this,viewModelProviderFactory).get(NewsViewModel::class.java)
+
+        val newsRepository = NewsRepository(ArticleDatabase(this))
+        val viewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(NewsViewModel::class.java)
         bottomNavigationView.setupWithNavController(newsNavHostFragment.findNavController())
     }
 }
