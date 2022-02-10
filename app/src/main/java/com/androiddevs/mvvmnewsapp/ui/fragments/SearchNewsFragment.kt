@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
@@ -29,8 +30,18 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
-        //The search delay jobs can be handled by coroutines i.e., coroutines job
 
+        newsAdapter.setOnItemClickListener {
+            val bundle =Bundle().apply {
+                putSerializable("article",it)
+            }
+            findNavController().navigate(
+                R.id.action_searchNewsFragment_to_articleFragment,
+                //attaching arguments to navigation
+                bundle
+            )
+        }
+        //The search delay jobs can be handled by coroutines i.e., coroutines job
         var job: Job? = null
         //search edit text
         etSearch.addTextChangedListener { editable ->
